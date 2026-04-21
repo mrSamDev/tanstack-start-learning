@@ -39,6 +39,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <nav className="flex gap-4 px-8 py-3 border-b text-sm">
           <Link to="/" className="hover:underline [&.active]:font-semibold">Number Adder</Link>
           <Link to="/crypto" className="hover:underline [&.active]:font-semibold">Crypto</Link>
+          <Link to="/rsc" className="hover:underline [&.active]:font-semibold">RSC (loader)</Link>
+          <Link to="/rsc-use" className="hover:underline [&.active]:font-semibold">RSC (use)</Link>
         </nav>
         {children}
         <TanStackDevtools

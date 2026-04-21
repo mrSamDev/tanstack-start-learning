@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RscUseRouteImport } from './routes/rsc-use'
 import { Route as RscRouteImport } from './routes/rsc'
 import { Route as CryptoRouteImport } from './routes/crypto'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RscUseRoute = RscUseRouteImport.update({
+  id: '/rsc-use',
+  path: '/rsc-use',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RscRoute = RscRouteImport.update({
   id: '/rsc',
   path: '/rsc',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/crypto': typeof CryptoRoute
   '/rsc': typeof RscRoute
+  '/rsc-use': typeof RscUseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/crypto': typeof CryptoRoute
   '/rsc': typeof RscRoute
+  '/rsc-use': typeof RscUseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/crypto': typeof CryptoRoute
   '/rsc': typeof RscRoute
+  '/rsc-use': typeof RscUseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/crypto' | '/rsc'
+  fullPaths: '/' | '/crypto' | '/rsc' | '/rsc-use'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/crypto' | '/rsc'
-  id: '__root__' | '/' | '/crypto' | '/rsc'
+  to: '/' | '/crypto' | '/rsc' | '/rsc-use'
+  id: '__root__' | '/' | '/crypto' | '/rsc' | '/rsc-use'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CryptoRoute: typeof CryptoRoute
   RscRoute: typeof RscRoute
+  RscUseRoute: typeof RscUseRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rsc-use': {
+      id: '/rsc-use'
+      path: '/rsc-use'
+      fullPath: '/rsc-use'
+      preLoaderRoute: typeof RscUseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rsc': {
       id: '/rsc'
       path: '/rsc'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CryptoRoute: CryptoRoute,
   RscRoute: RscRoute,
+  RscUseRoute: RscUseRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
