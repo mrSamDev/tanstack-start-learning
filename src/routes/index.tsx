@@ -10,7 +10,7 @@ import {
 	schema,
 } from "../fns/addNumbers";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({ ssr: false, component: Home });
 
 console.log(env.VITE_APP_TITLE);
 
